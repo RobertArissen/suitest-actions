@@ -5,7 +5,7 @@ const getAppConfig = require("../helpers/appConfig");
 
 const checkProcessStatus = async (url) => {
   return new Promise((res) => {
-    setTimeout(() => {
+    setTimeout(async () => {
       const processResult = await axios({
         method: "get",
         url,
