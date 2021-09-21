@@ -1,8 +1,6 @@
 name: 'Suitest Actions'
 description: 'Github Actions for Suitest'
 inputs:
-  browserstack-username:
-    description: 'Browserstack screenshot api username'
   action:
     description: 'Execute sub action. Available actions [upload-artifact]'
     required: true

@@ -31,7 +31,7 @@ const uploadArtifact = async () => {
     const packageResult = await axios({
       method: "put",
       url: `https://the.suite.st/api/public/v4/apps/${appId}/versions/${versionId}/configs/${configId}/package`,
-      data: fileContent.toString(),
+      data: fileContent,
       maxContentLength: Infinity,
       maxBodyLength: Infinity,
       headers: {
