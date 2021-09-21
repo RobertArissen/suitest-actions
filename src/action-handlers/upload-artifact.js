@@ -57,10 +57,10 @@ const uploadArtifact = async () => {
     });
 
     if (
-      processResult?.data?.status !== "pending" &&
-      processResult?.data?.status !== "done"
+      processResult.data.status !== "pending" &&
+      processResult.data.status !== "done"
     ) {
-      throw new Error(processResult?.data?.error.errorType);
+      throw new Error(processResult.data.error.errorType);
     }
   } catch (error) {
     throw new Error(error);
