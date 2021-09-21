@@ -1,0 +1,20 @@
+name: 'Suitest Actions'
+description: 'Github Actions for Suitest'
+inputs:
+  browserstack-username:
+    description: 'Browserstack screenshot api username'
+  action:
+    description: 'Execute sub action. Available actions [upload-artifact]'
+    required: true
+    default: 'upload-artifact'
+  artifact_filename:
+    description: 'Artifact filename'
+  artifact_folder:
+    description: 'Artifact folder location'
+  channel:
+    description: 'The current channel'
+  os:
+    description: 'The os type of the artifact (AndroidTV, tvOS)'
+runs:
+  using: 'node12'
+  main: 'index.js'

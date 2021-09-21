@@ -1,0 +1,20 @@
+{
+  "name": "suitest-actions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "eslint **.js",
+    "upload-artifact": "NODE_ENV=development ACTION=upload-artifact node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@actions/core": "^1.5.0",
+    "axios": "^0.21.4",
+    "dotenv": "^10.0.0",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  }
+}
