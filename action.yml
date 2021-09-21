@@ -14,5 +14,5 @@ inputs:
   os:
     description: 'The os type of the artifact (AndroidTV, tvOS)'
 runs:
-  using: 'node16'
+  using: 'node12'
   main: 'index.js'
