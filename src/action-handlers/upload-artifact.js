@@ -26,8 +26,10 @@ const checkProcessStatus = async (url) => {
 
       if(processResult.data.status === "done"){
         res();
+      }else{
+        checkProcessStatus(url);
       }
-    }, 3000);
+    }, 5000);
   });
 };
 
