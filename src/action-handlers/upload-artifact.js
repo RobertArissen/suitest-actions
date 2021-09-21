@@ -1,4 +1,4 @@
-const { readFile } = require("fs/promises");
+const { readFile } = require('fs').promises
 const axios = require("axios");
 const core = require("@actions/core");
 const getAppConfig = require("../helpers/appConfig");
