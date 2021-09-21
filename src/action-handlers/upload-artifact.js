@@ -1,7 +1,35 @@
-const { readFile } = require('fs').promises
+const { readFile } = require("fs").promises;
 const axios = require("axios");
 const core = require("@actions/core");
 const getAppConfig = require("../helpers/appConfig");
+
+const checkProcessStatus = async (url) => {
+  return new Promise((res) => {
+    setTimeout(() => {
+      const processResult = await axios({
+        method: "get",
+        url,
+        headers: {
+          "X-TokenId": process.env.SUITEST_TOKEN_ID,
+          "X-TokenPassword": process.env.SUITEST_TOKEN_PASSWORD,
+        },
+      });
+
+      if (
+        processResult.data.status !== "pending" &&
+        processResult.data.status !== "done"
+      ) {
+        throw new Error(processResult.data.error.errorType);
+      }
+
+      console.log(`Suitest process status: ${processResult.data.status}`);
+
+      if(processResult.data.status === "done"){
+        res();
+      }
+    }, 3000);
+  });
+};
 
 const uploadArtifact = async () => {
   try {
@@ -35,7 +63,7 @@ const uploadArtifact = async () => {
       maxContentLength: Infinity,
       maxBodyLength: Infinity,
       headers: {
-        "x-suitest-instrument": os === "AndroidTV" ? 'auto' : 'manuel',
+        "x-suitest-instrument": os === "AndroidTV" ? "auto" : "manuel",
         "x-suitest-filename": fileName,
         "X-TokenId": process.env.SUITEST_TOKEN_ID,
         "X-TokenPassword": process.env.SUITEST_TOKEN_PASSWORD,
@@ -44,31 +72,11 @@ const uploadArtifact = async () => {
       },
     });
 
-    console.log('Upload package done')
-
-    // Wait 5 sec
-    await new Promise((resolve) => setTimeout(resolve, 5000));
-
-    const processResult = await axios({
-      method: "get",
-      url: packageResult.data,
-      headers: {
-        "X-TokenId": process.env.SUITEST_TOKEN_ID,
-        "X-TokenPassword": process.env.SUITEST_TOKEN_PASSWORD,
-      },
-    });
-
-    if (
-      processResult.data.status !== "pending" &&
-      processResult.data.status !== "done"
-    ) {
-      throw new Error(processResult.data.error.errorType);
-    }
-
-    console.log(`Uploading ${fileName} in process`)
+    console.log("Upload Suitest package done");
+    await checkProcessStatus(packageResult.data);
   } catch (error) {
     throw new Error(error);
   }
 };
- 
+
 module.exports = uploadArtifact;
