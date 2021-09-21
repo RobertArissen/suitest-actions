@@ -44,6 +44,8 @@ const uploadArtifact = async () => {
       },
     });
 
+    console.log('Upload package done')
+
     // Wait 5 sec
     await new Promise((resolve) => setTimeout(resolve, 5000));
 
@@ -62,6 +64,8 @@ const uploadArtifact = async () => {
     ) {
       throw new Error(processResult.data.error.errorType);
     }
+
+    console.log(`Uploading ${fileName} in process`)
   } catch (error) {
     throw new Error(error);
   }
